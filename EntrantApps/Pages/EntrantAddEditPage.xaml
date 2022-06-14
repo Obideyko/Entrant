@@ -1,0 +1,66 @@
+﻿<Page x:Class="EntrantApps.Pages.EntrantAddEditPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EntrantApps.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="EntrantAddEditPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer  Grid.Row="0" VerticalScrollBarVisibility="Auto">
+            <WrapPanel Margin="10">
+                <Grid Width="350" Margin="10">
+                    <TextBlock Text="ФИО" HorizontalAlignment="Left"/>
+                    <TextBox Text="{Binding Name}" HorizontalAlignment="Right" Width="200" Height="24"/>
+                </Grid>
+                <Grid Width="350" Margin="10">
+                    <TextBlock Text="Дата рождения" HorizontalAlignment="Left"/>
+                    <DatePicker x:Name="datePicker" SelectedDate="{Binding Birthday, StringFormat={}{0:dd.MM.yyyy}}" HorizontalAlignment="Right" Width="200" Height="24"/>
+                </Grid>
+                <Grid Width="350" Margin="10">
+                    <TextBlock Text="Место рождения" HorizontalAlignment="Left"/>
+                    <TextBox Text="{Binding Place_of_birth}" HorizontalAlignment="Right" Width="200" Height="24"/>
+                </Grid>
+                <Grid Width="350" Margin="10">
+                    <TextBlock Text="Паспорт" HorizontalAlignment="Left"/>
+                    <TextBox Text="{Binding Passport}" MaxLength="10" x:Name="pasText" HorizontalAlignment="Right" Width="200" Height="24"/>
+                </Grid>
+                <Grid Width="350" Margin="10">
+                    <TextBlock Text="Когда и кем выдан" HorizontalAlignment="Left"/>
+                    <TextBox Text="{Binding Whem_and_by_whom_issued}" HorizontalAlignment="Right" Width="200" Height="24"/>
+                </Grid>
+                <Grid Width="350" Margin="10">
+                    <TextBlock Text="Место проживания" HorizontalAlignment="Left"/>
+                    <TextBox Text="{Binding Place_of_residence}" HorizontalAlignment="Right" Width="200" Height="24"/>
+                </Grid>
+                <Grid Width="350" Margin="10">
+                    <TextBlock Text="СНИЛС" HorizontalAlignment="Left"/>
+                    <TextBox Text="{Binding SNILS}" MaxLength="11" x:Name="snilsText" HorizontalAlignment="Right" Width="200" Height="24"/>
+                </Grid>
+                <Grid Width="350" Margin="10">
+                    <TextBlock Text="Полис" HorizontalAlignment="Left"/>
+                    <TextBox Text="{Binding Medical_policy}"  MaxLength="16" x:Name="policyText" HorizontalAlignment="Right" Width="200" Height="24"/>
+                </Grid>
+                <Grid Width="350" Margin="10">
+                    <TextBlock Text="Номер аттестата" HorizontalAlignment="Left"/>
+                    <ComboBox x:Name="ComboCertificate" SelectedItem="{Binding Certificate1}" DisplayMemberPath="Number" HorizontalAlignment="Right" Width="200" Height="24"/>
+                </Grid>
+                <Grid Width="350" Margin="10">
+                    <TextBlock Text="Телефон" HorizontalAlignment="Left"/>
+                    <TextBox Text="{Binding Telephone}" MaxLength="11" x:Name="telText" HorizontalAlignment="Right" Width="200" Height="24"/>
+                </Grid>
+                <Grid Width="350" Margin="10">
+                    <TextBlock Text="Специальность" HorizontalAlignment="Left"/>
+                    <ComboBox x:Name="ComboSpecialization" SelectedItem="{Binding Specialization}" DisplayMemberPath="Name" HorizontalAlignment="Right" Width="200" Height="24"/>
+                </Grid>
+            </WrapPanel>
+        </ScrollViewer>
+        <Button x:Name="BtnSave" Click="BtnSave_Click" Content="Сохранить" Grid.Row="1" Width="200" Background="White" Foreground="#000000" BorderBrush="#FF7E7E7E" Cursor="Hand"/>
+    </Grid>
+</Page>

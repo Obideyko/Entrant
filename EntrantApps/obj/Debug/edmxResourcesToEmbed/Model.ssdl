@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище EntrantBaseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Certificate">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Entrant" Type="int" />
+    <Property Name="Number" Type="nvarchar" MaxLength="14" Nullable="false" />
+    <Property Name="Russian_language" Type="int" Nullable="false" />
+    <Property Name="Literature" Type="int" Nullable="false" />
+    <Property Name="Native_language" Type="int" Nullable="false" />
+    <Property Name="Nativa_literature" Type="int" Nullable="false" />
+    <Property Name="Algebra" Type="int" Nullable="false" />
+    <Property Name="Geometry" Type="int" Nullable="false" />
+    <Property Name="History" Type="int" Nullable="false" />
+    <Property Name="Social_studies" Type="int" Nullable="false" />
+    <Property Name="Geography" Type="int" Nullable="false" />
+    <Property Name="Physics" Type="int" Nullable="false" />
+    <Property Name="Biology" Type="int" Nullable="false" />
+    <Property Name="Chemistry" Type="int" Nullable="false" />
+    <Property Name="Foreign_language" Type="int" Nullable="false" />
+    <Property Name="OBZH" Type="int" Nullable="false" />
+    <Property Name="Informatics" Type="int" Nullable="false" />
+    <Property Name="Physica_culture" Type="int" Nullable="false" />
+    <Property Name="Technology" Type="int" Nullable="false" />
+    <Property Name="Art" Type="int" Nullable="false" />
+    <Property Name="Music" Type="int" Nullable="false" />
+    <Property Name="Average" Type="float" />
+  </EntityType>
+  <EntityType Name="Entrant">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Birthday" Type="date" Nullable="false" />
+    <Property Name="Place_of_birth" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Passport" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Whem_and_by_whom_issued" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Place_of_residence" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="SNILS" Type="nvarchar" MaxLength="11" Nullable="false" />
+    <Property Name="Medical_policy" Type="nvarchar" MaxLength="16" Nullable="false" />
+    <Property Name="ID_Certificate" Type="int" />
+    <Property Name="Telephone" Type="nvarchar" MaxLength="11" Nullable="false" />
+    <Property Name="ID_Specialization" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Specialization">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Certificate_Entrant">
+    <End Role="Entrant" Type="Self.Entrant" Multiplicity="0..1" />
+    <End Role="Certificate" Type="Self.Certificate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entrant">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Certificate">
+        <PropertyRef Name="ID_Entrant" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Entrant_Certificate">
+    <End Role="Certificate" Type="Self.Certificate" Multiplicity="0..1" />
+    <End Role="Entrant" Type="Self.Entrant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Certificate">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Entrant">
+        <PropertyRef Name="ID_Certificate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Entrant_Specialization">
+    <End Role="Specialization" Type="Self.Specialization" Multiplicity="1" />
+    <End Role="Entrant" Type="Self.Entrant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Specialization">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Entrant">
+        <PropertyRef Name="ID_Specialization" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище EntrantBaseModelContainer">
+    <EntitySet Name="Certificate" EntityType="Self.Certificate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Entrant" EntityType="Self.Entrant" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Specialization" EntityType="Self.Specialization" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Certificate_Entrant" Association="Self.FK_Certificate_Entrant">
+      <End Role="Entrant" EntitySet="Entrant" />
+      <End Role="Certificate" EntitySet="Certificate" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Entrant_Certificate" Association="Self.FK_Entrant_Certificate">
+      <End Role="Certificate" EntitySet="Certificate" />
+      <End Role="Entrant" EntitySet="Entrant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Entrant_Specialization" Association="Self.FK_Entrant_Specialization">
+      <End Role="Specialization" EntitySet="Specialization" />
+      <End Role="Entrant" EntitySet="Entrant" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

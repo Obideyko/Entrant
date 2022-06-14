@@ -1,0 +1,67 @@
+﻿<Page x:Class="EntrantApps.Pages.CertificatePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EntrantApps.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="CertificatePage" IsVisibleChanged="Page_IsVisibleChanged">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="200*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <WrapPanel Grid.Row="0" Grid.ColumnSpan="3">
+            <StackPanel Orientation="Horizontal" Width="450" Height="30" Margin="5">
+                <TextBlock Text="Введите номер аттестата для поиска:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="14"/>
+                <TextBox Name="tBox" TextChanged="TextBox_TextChanged" Width="200" Height="24" Margin="5 0 0 0" Cursor="Arrow" FontSize="14"/>
+            </StackPanel>
+        </WrapPanel>
+        <DataGrid Grid.Row="1" Grid.ColumnSpan="3" Name="DGridCertificate" AutoGenerateColumns="False" IsReadOnly="True"  Background="{x:Null}" BorderBrush="{x:Null}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ФИО" Binding="{Binding Entrant.Name}" Width="auto"/>
+                <DataGridTextColumn Header="Номер" Binding="{Binding Number}" Width="auto"/>
+                <DataGridTextColumn Header="Русский язык" Binding="{Binding Russian_language}" Width="auto"/>
+                <DataGridTextColumn Header="Литература" Binding="{Binding Literature}" Width="auto"/>
+                <DataGridTextColumn Header="Родной язык" Binding="{Binding Native_language}" Width="auto"/>
+                <DataGridTextColumn Header="Родная литература" Binding="{Binding Nativa_literature}" Width="auto"/>
+                <DataGridTextColumn Header="Алгебра" Binding="{Binding Algebra}" Width="auto"/>
+                <DataGridTextColumn Header="Геометрия" Binding="{Binding Geometry}" Width="auto"/>
+                <DataGridTextColumn Header="История" Binding="{Binding History}" Width="auto"/>
+                <DataGridTextColumn Header="Обществознание" Binding="{Binding Social_studies}" Width="auto"/>
+                <DataGridTextColumn Header="География" Binding="{Binding Geography}" Width="auto"/>
+                <DataGridTextColumn Header="Физика" Binding="{Binding Physics}" Width="auto"/>
+                <DataGridTextColumn Header="Биология" Binding="{Binding Biology}" Width="auto"/>
+                <DataGridTextColumn Header="Химия" Binding="{Binding Chemistry}" Width="auto"/>
+                <DataGridTextColumn Header="Иностранный язык" Binding="{Binding Foreign_language}" Width="auto"/>
+                <DataGridTextColumn Header="ОБЖ" Binding="{Binding OBZH}" Width="auto"/>
+                <DataGridTextColumn Header="Информатика" Binding="{Binding Informatics}" Width="auto"/>
+                <DataGridTextColumn Header="Физкультура" Binding="{Binding Physica_culture}" Width="auto"/>
+                <DataGridTextColumn Header="Технология" Binding="{Binding Technology}" Width="auto"/>
+                <DataGridTextColumn Header="Искусство" Binding="{Binding Art}" Width="auto"/>
+                <DataGridTextColumn Header="Музыка" Binding="{Binding Music}" Width="auto"/>
+                <DataGridTextColumn Header="Средний балл" Binding="{Binding Average}" Width="auto"/>
+                <DataGridTemplateColumn Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="EditBtn" Click="EditBtn_Click" Content="Редактировать" Background="White" Foreground="#000000" BorderBrush="#FF7E7E7E" Cursor="Hand"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="auto" x:Name="CalculateColumns">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="CalculateBtn" Click="EditBtn_Click" Content="Рассчитать" Background="White" Foreground="#000000" BorderBrush="#FF7E7E7E" Cursor="Hand"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="AddBtn" Click="AddBtn_Click" Content="Добавить" Grid.Row="2" Margin="20 0 0 0" HorizontalAlignment="Left" Width="175" Background="White" Foreground="#000000" BorderBrush="#FF7E7E7E" Cursor="Hand"/>
+        <Button x:Name="DelBtn" Click="DelBtn_Click" Content="Удалить" Grid.Row="2" HorizontalAlignment="Center" Width="175" Background="White" Foreground="#000000" BorderBrush="#FF7E7E7E" Cursor="Hand"/>
+        <Button x:Name="ExBtn" Click="ExBtn_Click" Content="Экспортировать" Grid.Row="2" Margin="0 0 20 0" HorizontalAlignment="Right" Width="175" Background="White" Foreground="#000000" BorderBrush="#FF7E7E7E" Cursor="Hand"/>
+    </Grid>
+</Page>

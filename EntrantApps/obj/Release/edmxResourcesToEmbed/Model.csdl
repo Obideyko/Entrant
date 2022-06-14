@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EntrantBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Certificate">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Entrant" Type="Int32" />
+    <Property Name="Number" Type="String" MaxLength="14" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Russian_language" Type="Int32" Nullable="false" />
+    <Property Name="Literature" Type="Int32" Nullable="false" />
+    <Property Name="Native_language" Type="Int32" Nullable="false" />
+    <Property Name="Nativa_literature" Type="Int32" Nullable="false" />
+    <Property Name="Algebra" Type="Int32" Nullable="false" />
+    <Property Name="Geometry" Type="Int32" Nullable="false" />
+    <Property Name="History" Type="Int32" Nullable="false" />
+    <Property Name="Social_studies" Type="Int32" Nullable="false" />
+    <Property Name="Geography" Type="Int32" Nullable="false" />
+    <Property Name="Physics" Type="Int32" Nullable="false" />
+    <Property Name="Biology" Type="Int32" Nullable="false" />
+    <Property Name="Chemistry" Type="Int32" Nullable="false" />
+    <Property Name="Foreign_language" Type="Int32" Nullable="false" />
+    <Property Name="OBZH" Type="Int32" Nullable="false" />
+    <Property Name="Informatics" Type="Int32" Nullable="false" />
+    <Property Name="Physica_culture" Type="Int32" Nullable="false" />
+    <Property Name="Technology" Type="Int32" Nullable="false" />
+    <Property Name="Art" Type="Int32" Nullable="false" />
+    <Property Name="Music" Type="Int32" Nullable="false" />
+    <Property Name="Average" Type="Double" />
+    <NavigationProperty Name="Entrant" Relationship="Self.FK_Certificate_Entrant" FromRole="Certificate" ToRole="Entrant" />
+    <NavigationProperty Name="Entrant1" Relationship="Self.FK_Entrant_Certificate" FromRole="Certificate" ToRole="Entrant" />
+  </EntityType>
+  <EntityType Name="Entrant">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Place_of_birth" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Passport" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Whem_and_by_whom_issued" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Place_of_residence" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SNILS" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Medical_policy" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ID_Certificate" Type="Int32" />
+    <Property Name="Telephone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ID_Specialization" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Certificate" Relationship="Self.FK_Certificate_Entrant" FromRole="Entrant" ToRole="Certificate" />
+    <NavigationProperty Name="Certificate1" Relationship="Self.FK_Entrant_Certificate" FromRole="Entrant" ToRole="Certificate" />
+    <NavigationProperty Name="Specialization" Relationship="Self.FK_Entrant_Specialization" FromRole="Entrant" ToRole="Specialization" />
+  </EntityType>
+  <EntityType Name="Specialization">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Entrant" Relationship="Self.FK_Entrant_Specialization" FromRole="Specialization" ToRole="Entrant" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Certificate_Entrant">
+    <End Role="Entrant" Type="Self.Entrant" Multiplicity="0..1" />
+    <End Role="Certificate" Type="Self.Certificate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entrant">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Certificate">
+        <PropertyRef Name="ID_Entrant" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Entrant_Certificate">
+    <End Role="Certificate" Type="Self.Certificate" Multiplicity="0..1" />
+    <End Role="Entrant" Type="Self.Entrant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Certificate">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Entrant">
+        <PropertyRef Name="ID_Certificate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Entrant_Specialization">
+    <End Role="Specialization" Type="Self.Specialization" Multiplicity="1" />
+    <End Role="Entrant" Type="Self.Entrant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Specialization">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Entrant">
+        <PropertyRef Name="ID_Specialization" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EntrantBaseEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Certificate" EntityType="Self.Certificate" />
+    <EntitySet Name="Entrant" EntityType="Self.Entrant" />
+    <EntitySet Name="Specialization" EntityType="Self.Specialization" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <AssociationSet Name="FK_Certificate_Entrant" Association="Self.FK_Certificate_Entrant">
+      <End Role="Entrant" EntitySet="Entrant" />
+      <End Role="Certificate" EntitySet="Certificate" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Entrant_Certificate" Association="Self.FK_Entrant_Certificate">
+      <End Role="Certificate" EntitySet="Certificate" />
+      <End Role="Entrant" EntitySet="Entrant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Entrant_Specialization" Association="Self.FK_Entrant_Specialization">
+      <End Role="Specialization" EntitySet="Specialization" />
+      <End Role="Entrant" EntitySet="Entrant" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
